@@ -1,98 +1,95 @@
----
-title: "Lab 02 - Plastic waste"
-author: "Frédérique Genest"
-date: "15 septembre 2025"
-output: github_document
----
+Lab 02 - Plastic waste
+================
+Frédérique Genest
+15 septembre 2025
 
 ## Chargement des packages et des données
 
-```{r load-packages, message=FALSE}
+``` r
 library(tidyverse) 
 ```
 
-```{r load-data, message=FALSE}
+``` r
 plastic_waste <- read_csv("data/plastic-waste.csv")
 ```
 
-Commençons par filtrer les données pour retirer le point représenté par Trinité et Tobago (TTO) qui est un outlier.
+Commençons par filtrer les données pour retirer le point représenté par
+Trinité et Tobago (TTO) qui est un outlier.
 
-```{r filter-data, message=FALSE}
+``` r
 plastic_waste <- plastic_waste %>%
   filter(plastic_waste_per_cap < 3.5)
 ```
-
 
 ## Exercices
 
 ### Exercise 1
 
-```{r plastic-waste-continent}
+``` r
 ggplot(plastic_waste,
        aes(x=plastic_waste_per_cap))+
   geom_histogram(binwidth = 0.20)+
   facet_wrap(~continent)
-
 ```
+
+![](lab-02_files/figure-gfm/plastic-waste-continent-1.png)<!-- -->
 
 ### Exercise 2
 
-```{r plastic-waste-density}
+``` r
 ggplot(plastic_waste,
        aes(x=plastic_waste_per_cap, fill=continent))+
   geom_density(alpha=0.3)
 ```
 
-Réponse à la question...
+![](lab-02_files/figure-gfm/plastic-waste-density-1.png)<!-- -->
+
+Réponse à la question…
 
 ### Exercise 3
 
 Boxplot:
 
-```{r plastic-waste-boxplot}
+``` r
 ggplot(plastic_waste,
        aes(x=continent,y=plastic_waste_per_cap))+
   geom_boxplot()
 ```
 
+![](lab-02_files/figure-gfm/plastic-waste-boxplot-1.png)<!-- -->
+
 Violin plot:
 
-```{r plastic-waste-violin}
+``` r
 ggplot(plastic_waste,
        aes(x=continent,y=plastic_waste_per_cap))+
   geom_violin()
 ```
 
-Réponse à la question...
+![](lab-02_files/figure-gfm/plastic-waste-violin-1.png)<!-- -->
+
+Réponse à la question…
 
 ### Exercise 4
 
-
-```{r plastic-waste-mismanaged}
-
-
-
-```
-
-Réponse à la question...
+Réponse à la question…
 
 ### Exercise 5
 
-
-```{r plastic-waste-population-total}
+``` r
 # insert code here
 ```
 
-```{r plastic-waste-population-coastal}
+``` r
 # insert code here
 ```
 
-Réponse à la question...
+Réponse à la question…
 
 ## Conclusion
 
 Recréez la visualisation:
 
-```{r recreate-viz}
+``` r
 # insert code here
 ```
