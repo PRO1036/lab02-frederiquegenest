@@ -122,3 +122,28 @@ Réponse à la question…
 ## Conclusion
 
 Recréez la visualisation:
+
+``` r
+plastic_waste_coastal <- plastic_waste %>% 
+  mutate(coastal_pop_prop = coastal_pop / total_pop) %>%
+  filter(plastic_waste_per_cap < 3)
+```
+
+``` r
+ggplot(plastic_waste_coastal,
+       aes(x=coastal_pop_prop,y=plastic_waste_per_cap))+
+  geom_point(aes(color=continent))+
+  geom_smooth()
+```
+
+    ## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+
+    ## Warning: Removed 10 rows containing non-finite outside the scale range
+    ## (`stat_smooth()`).
+
+    ## Warning: Removed 10 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](lab-02_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+
+interpréter…
