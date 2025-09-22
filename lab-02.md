@@ -29,7 +29,8 @@ plastic_waste <- plastic_waste %>%
 ggplot(plastic_waste,
        aes(x=plastic_waste_per_cap))+
   geom_histogram(binwidth = 0.20)+
-  facet_wrap(~continent)
+  facet_wrap(~continent)+
+  labs(title="Quantité de déchets plastiques par habitant selon chaque continent",x="Quantité de déchets plastique par habitant en kg/jour",y="Nombre de pays")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-continent-1.png)<!-- --> Selon
@@ -46,7 +47,8 @@ kg/jour.
 ``` r
 ggplot(plastic_waste,
        aes(x=plastic_waste_per_cap, fill=continent))+
-  geom_density(alpha=0.3)
+  geom_density(alpha=0.3)+
+  labs(title="Quantité de déchets plastiques par habitant")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-density-1.png)<!-- -->
@@ -54,7 +56,7 @@ ggplot(plastic_waste,
 Le réglage alpha se trouve dans geom_density parce qu’il est fixe et ne
 dépend pas de variables. Ce réglage sert uniquement à l’esthétique du
 graphique et à améliorer la lecture de celui-ci pour reconnaître les
-tendences. Les régages color et fill sont plutôt dépendants des
+tendences. Les réglages color et fill sont plutôt dépendants des
 variables parce que dans cet exemple, ils servent à différencier les
 tendences de chaque continent. Les couleurs sont donc différentes pour
 chaque continent tandis que le réglage alpha est le même pour tout le
@@ -146,4 +148,6 @@ ggplot(plastic_waste_coastal,
 
 ![](lab-02_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
-interpréter…
+Selon la courbe de tendance générée, la proportion de population vivant
+sur les côtes n’influence pas de manière significative la quantité de
+déchets plastiques par habitant.
