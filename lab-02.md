@@ -30,25 +30,32 @@ ggplot(plastic_waste,
        aes(x=plastic_waste_per_cap))+
   geom_histogram(binwidth = 0.20)+
   facet_wrap(~continent)+
-  labs(title="Quantité de déchets plastiques par habitant selon chaque continent",x="Quantité de déchets plastique par habitant en kg/jour",y="Nombre de pays")
+  labs(title="Distribution des pays de chaque continent",
+       subtitle="selon la quantité de déchets plastiques par habitant",
+       x="Quantité de déchets plastique par habitant en kg/jour",
+       y="Nombre de pays")
 ```
 
-![](lab-02_files/figure-gfm/plastic-waste-continent-1.png)<!-- --> Selon
-le graphique de comparaison entre les continents, on peut constater que
-l’Amérique du Nord est celui qui compte le plus de pays ayant une
-quantité de déchets plastiques par habitants supérieure à 0.50 kg/jour.
-La majorité des pays ont une quantité de déchets d’environ 0.25 kg/jour.
-On peut également constater que l’Afrique est le continent avec le plus
-de pays comptant une quantité de déchets par habitant près de 0.00
-kg/jour.
+![](lab-02_files/figure-gfm/plastic-waste-continent-1.png)<!-- -->
+
+Selon le graphique de comparaison entre les continents, on peut
+constater que l’Amérique du Nord est celui qui compte le plus de pays
+ayant une quantité de déchets plastiques par habitants supérieure à 0.50
+kg/jour. La majorité des pays ont une quantité de déchets d’environ 0.25
+kg/jour. On peut également constater que l’Afrique est le continent avec
+le plus de pays comptant une quantité de déchets par habitant près de
+0.00 kg/jour.
 
 ### Exercise 2
 
 ``` r
 ggplot(plastic_waste,
-       aes(x=plastic_waste_per_cap, fill=continent))+
+       aes(x=plastic_waste_per_cap, fill=continent,color=continent))+
   geom_density(alpha=0.3)+
-  labs(title="Quantité de déchets plastiques par habitant")
+  labs(title="Distribution de la quantité de déchets plastiques par habitant",
+       subtitle="selon chaque continent",
+       x="Quantité de déchets plastiques par habitant en kg/jour",
+       y="Densité")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-density-1.png)<!-- -->
@@ -69,7 +76,10 @@ Boxplot:
 ``` r
 ggplot(plastic_waste,
        aes(x=continent,y=plastic_waste_per_cap))+
-  geom_boxplot()
+  geom_boxplot()+
+  labs(title="Distribution de la quantité de déchets plastiques par habitant selon chaque continent",
+       x="Continent",
+       y="Quantité de déchets plastiques par habitant en kg/jour")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-boxplot-1.png)<!-- -->
@@ -79,31 +89,52 @@ Violin plot:
 ``` r
 ggplot(plastic_waste,
        aes(x=continent,y=plastic_waste_per_cap))+
-  geom_violin()
+  geom_violin()+
+  labs(title="Distribution de la quantité de déchets plastiques par habitant selon chaque continent",
+       x="Continent",
+       y="Quantité de déchets plastiques par habitant en kg/jour")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-violin-1.png)<!-- -->
 
-Les violin plots permettent de mieux voir la densité des
+Les violin plots permettent de mieux voir la densité. On peut voir avec
+plus de précision la quantité de déchets plastiques par habitant qu’on
+retrouve le plus par continent. On peut aussi voir comment les quantités
+sont distribuées. Par exemple, l’Europe comprend une grande gamme de
+résultats distibués de manière presque égale tandis que l’Afrique une
+petite gamme de valeurs qui sont plus représentées que les autres.
 
 ### Exercise 4
 
 ``` r
 ggplot(plastic_waste,
        aes(x=plastic_waste_per_cap,y=mismanaged_plastic_waste_per_cap,color=continent))+
-  geom_point()
+  geom_point()+
+  labs(title="Quantité de déchets plastiques non gérés par habitant",
+       subtitle="en fonction de la quantité de déchets plastiques par habitant",
+       x="Quantité de déchets plastiques par habitant en kg/jour",
+       y="Quantité de déchets plastiques non gérés par habitant en kg/jour")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-mismanaged-1.png)<!-- -->
 
-Réponse à la question…
+On ne peut pas observer de tendance globale, mais il semble y avoir une
+certaine tendance limitée à chaque continent. Par exemple, la quantité
+de déchets par habitant en Afrique est presque toujours égale à la
+quantité de déchets non gérés. En comparaison, la quantité de déchets
+non gérés en Europe est dans plusieurs cas inférieure à la quantité de
+déchets par habitants.
 
 ### Exercise 5
 
 ``` r
 ggplot(plastic_waste,
-       aes(x=plastic_waste_per_cap,y=total_pop))+
-  geom_point()
+       aes(y=plastic_waste_per_cap,x=total_pop))+
+  geom_point()+
+  labs(title="Quantité de déchets plastiques par habitant",
+       subtitle="en fonction de la population totale",
+       x="Population totale",
+       y="Quantité de déchets plastiques par habitant en kg/jour")
 ```
 
     ## Warning: Removed 10 rows containing missing values or values outside the scale range
@@ -113,13 +144,20 @@ ggplot(plastic_waste,
 
 ``` r
 ggplot(plastic_waste,
-       aes(x=plastic_waste_per_cap,y=coastal_pop))+
-  geom_point()
+       aes(y=plastic_waste_per_cap,x=coastal_pop))+
+  geom_point()+
+  labs(title="Quantité de déchets plastiques par habitant",
+       subtitle="en fonction de la population côtière",
+       x="population côtière",
+       y="Quantité de déchets plastiques par habitant en kg/jour")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-population-coastal-1.png)<!-- -->
 
-Réponse à la question…
+Dans les deux cas, il ne semble pas y avoir de forte relation entre les
+deux variables. La population totale n’influence pas la quantité de
+déchets par habitant. On peut aussi observer la présence de données
+aberrantes où la population est très élevée.
 
 ## Conclusion
 
@@ -135,7 +173,11 @@ plastic_waste_coastal <- plastic_waste %>%
 ggplot(plastic_waste_coastal,
        aes(x=coastal_pop_prop,y=plastic_waste_per_cap))+
   geom_point(aes(color=continent))+
-  geom_smooth()
+  geom_smooth(color="black")+
+  labs(title="Quantité de déchets plastiques par habitant", 
+       subtitle="en fonction de la proportion de population côtière",
+       x="Proportion de population côtière",
+       y="Quantité de déchets plastiques par habitant en kg/jour")
 ```
 
     ## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
